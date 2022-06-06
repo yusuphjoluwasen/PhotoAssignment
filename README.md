@@ -8,7 +8,7 @@ The App contains three screens, the album screen, the photos screen, the photo d
 * Architecture: MVVM-C + Repository
 * Collection View Compositional Layout
 * Swift 5
-* StoryBoard Programmatic UI
+* StoryBoard and Programmatic UI
 * RxSwift
 * Delegation
 * Modular Design
