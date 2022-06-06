@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091BCC0A284EA296002D2F1E /* GenericFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BCC09284EA296002D2F1E /* GenericFunctions.swift */; };
 		0926842F284350510017BE0C /* MockAlbumHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0926842E284350510017BE0C /* MockAlbumHttpClient.swift */; };
 		09268431284351110017BE0C /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09268430284351110017BE0C /* StubGenerator.swift */; };
 		09268433284353AB0017BE0C /* MockAlbumRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09268432284353AB0017BE0C /* MockAlbumRepositoryFactory.swift */; };
@@ -53,12 +54,11 @@
 		09E7CFFC284B4F3300D7D3B4 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7CFFB284B4F3300D7D3B4 /* Api.swift */; };
 		09E7CFFE284B659D00D7D3B4 /* Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7CFFD284B659D00D7D3B4 /* Optionals.swift */; };
 		09E7D000284B6B5B00D7D3B4 /* AlbumDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7CFFF284B6B5B00D7D3B4 /* AlbumDataSource.swift */; };
-		09E7D004284B79DE00D7D3B4 /* AlbumAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D003284B79DE00D7D3B4 /* AlbumAction.swift */; };
+		09E7D004284B79DE00D7D3B4 /* AlbumViewAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D003284B79DE00D7D3B4 /* AlbumViewAction.swift */; };
 		09E7D006284BBAF700D7D3B4 /* AlbumViewModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D005284BBAF700D7D3B4 /* AlbumViewModelProtocols.swift */; };
 		09E7D00E284BD7BA00D7D3B4 /* NetworkApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D00D284BD7BA00D7D3B4 /* NetworkApiTest.swift */; };
 		09E7D016284BECB200D7D3B4 /* MockAlbumRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D015284BECB200D7D3B4 /* MockAlbumRepository.swift */; };
 		09E7D018284BED4B00D7D3B4 /* AlbumViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D017284BED4B00D7D3B4 /* AlbumViewModelTest.swift */; };
-		09E7D01C284C129600D7D3B4 /* AlbumViewModel+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D01B284C129600D7D3B4 /* AlbumViewModel+Data.swift */; };
 		09E7D01E284C15A900D7D3B4 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D01D284C15A900D7D3B4 /* PhotoModel.swift */; };
 		09E7D020284C18DD00D7D3B4 /* PhotoListViewModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D01F284C18DD00D7D3B4 /* PhotoListViewModelProtocols.swift */; };
 		09E7D022284C22CB00D7D3B4 /* PhotoAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7D021284C22CB00D7D3B4 /* PhotoAction.swift */; };
@@ -100,6 +100,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		091BCC09284EA296002D2F1E /* GenericFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericFunctions.swift; sourceTree = "<group>"; };
 		0926842E284350510017BE0C /* MockAlbumHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumHttpClient.swift; sourceTree = "<group>"; };
 		09268430284351110017BE0C /* StubGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
 		09268432284353AB0017BE0C /* MockAlbumRepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumRepositoryFactory.swift; sourceTree = "<group>"; };
@@ -143,12 +144,11 @@
 		09E7CFFB284B4F3300D7D3B4 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		09E7CFFD284B659D00D7D3B4 /* Optionals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionals.swift; sourceTree = "<group>"; };
 		09E7CFFF284B6B5B00D7D3B4 /* AlbumDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDataSource.swift; sourceTree = "<group>"; };
-		09E7D003284B79DE00D7D3B4 /* AlbumAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumAction.swift; sourceTree = "<group>"; };
+		09E7D003284B79DE00D7D3B4 /* AlbumViewAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewAction.swift; sourceTree = "<group>"; };
 		09E7D005284BBAF700D7D3B4 /* AlbumViewModelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModelProtocols.swift; sourceTree = "<group>"; };
 		09E7D00D284BD7BA00D7D3B4 /* NetworkApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApiTest.swift; sourceTree = "<group>"; };
 		09E7D015284BECB200D7D3B4 /* MockAlbumRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockAlbumRepository.swift; sourceTree = "<group>"; };
 		09E7D017284BED4B00D7D3B4 /* AlbumViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModelTest.swift; sourceTree = "<group>"; };
-		09E7D01B284C129600D7D3B4 /* AlbumViewModel+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlbumViewModel+Data.swift"; sourceTree = "<group>"; };
 		09E7D01D284C15A900D7D3B4 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		09E7D01F284C18DD00D7D3B4 /* PhotoListViewModelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewModelProtocols.swift; sourceTree = "<group>"; };
 		09E7D021284C22CB00D7D3B4 /* PhotoAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAction.swift; sourceTree = "<group>"; };
@@ -259,12 +259,11 @@
 			isa = PBXGroup;
 			children = (
 				098F5A17284764F10002364B /* AlbumViewController.swift */,
-				095791E628493551001B0869 /* AlbumViewModel.swift */,
-				095791E828493573001B0869 /* AlbumRepository.swift */,
 				09E7CFFF284B6B5B00D7D3B4 /* AlbumDataSource.swift */,
-				09E7D003284B79DE00D7D3B4 /* AlbumAction.swift */,
+				09E7D003284B79DE00D7D3B4 /* AlbumViewAction.swift */,
+				095791E628493551001B0869 /* AlbumViewModel.swift */,
 				09E7D005284BBAF700D7D3B4 /* AlbumViewModelProtocols.swift */,
-				09E7D01B284C129600D7D3B4 /* AlbumViewModel+Data.swift */,
+				095791E828493573001B0869 /* AlbumRepository.swift */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -328,6 +327,7 @@
 				0995B0142841BBDB005F67A8 /* PrimitiveExtensions.swift */,
 				095791E428492B2A001B0869 /* StoryboardFactory.swift */,
 				09E7CFFD284B659D00D7D3B4 /* Optionals.swift */,
+				091BCC09284EA296002D2F1E /* GenericFunctions.swift */,
 			);
 			path = iOSUtilities;
 			sourceTree = "<group>";
@@ -645,7 +645,7 @@
 				0995B0152841BBDB005F67A8 /* PrimitiveExtensions.swift in Sources */,
 				095791DF2849148A001B0869 /* AppCoordinator.swift in Sources */,
 				095791E3284923A0001B0869 /* Coordinator.swift in Sources */,
-				09E7D004284B79DE00D7D3B4 /* AlbumAction.swift in Sources */,
+				09E7D004284B79DE00D7D3B4 /* AlbumViewAction.swift in Sources */,
 				095791BF28482575001B0869 /* PhotoView.swift in Sources */,
 				0995B00128419BB7005F67A8 /* Fonts.swift in Sources */,
 				09E7CFFE284B659D00D7D3B4 /* Optionals.swift in Sources */,
@@ -678,6 +678,7 @@
 				09E7CFFC284B4F3300D7D3B4 /* Api.swift in Sources */,
 				095791E728493551001B0869 /* AlbumViewModel.swift in Sources */,
 				095791E528492B2A001B0869 /* StoryboardFactory.swift in Sources */,
+				091BCC0A284EA296002D2F1E /* GenericFunctions.swift in Sources */,
 				0995AFF928419B08005F67A8 /* NetworkingUtil.swift in Sources */,
 				C965E185283B8DC000330273 /* SceneDelegate.swift in Sources */,
 				095791C62848307D001B0869 /* PhotoCell.swift in Sources */,
@@ -689,7 +690,6 @@
 				095791F028497DF7001B0869 /* AlbumModel.swift in Sources */,
 				09E7D01E284C15A900D7D3B4 /* PhotoModel.swift in Sources */,
 				095791DC2848E8B7001B0869 /* Album+CoreDataClass.swift in Sources */,
-				09E7D01C284C129600D7D3B4 /* AlbumViewModel+Data.swift in Sources */,
 				095791CA2848313B001B0869 /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

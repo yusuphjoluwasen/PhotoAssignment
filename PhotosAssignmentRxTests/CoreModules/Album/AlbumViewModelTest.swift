@@ -15,13 +15,13 @@ class MockAlbumViewModelTest: XCTestCase {
     var repository:MockAlbumRepository?
     let disposeBag = DisposeBag()
     var sut:AlbumViewModel?
-    var data:[AlbumModel]?
+    var data:[AlbumDto]?
 
     override func setUp() {
         super.setUp()
         repository = MockAlbumRepository()
         sut = AlbumViewModel(repository: repository!)
-        data =  fetchAlbums()
+        data =  repository?.mapAlbumDataToDto(data: fetchAlbums()!)
     }
 
     override func tearDown() {
@@ -40,24 +40,8 @@ class MockAlbumViewModelTest: XCTestCase {
     }
     
     func test_album_list_is_not_empty(){
-        sut?.updateAlbumDto(albums: data!)
+        sut?.albumList = data!
         XCTAssertTrue(sut?.albumList.count == 10, "list is not empty")
-    }
-    
-    func test_album_model_list_converted_to_album_list(){
-        let newlist = sut?.mapAlbumDataToDto(data: data!)
-        XCTAssertTrue(newlist?.count == 10, "converted sucessfully")
-    }
-    
-    func test_album_database_is_not_empty(){
-        let albumdblist = saveToDBandFetch()
-        XCTAssertNotNil(albumdblist, "album database is not empty")
-    }
-    
-    func  test_album_db_list_converted_to_album_dto_list(){
-        let albumdblist = saveToDBandFetch()
-        let datadto = sut?.mapAlbumDataToDto(data: albumdblist!)
-        XCTAssertNotNil(datadto, "converted sucessfully")
     }
 
     func test_nav_title_is_correct(){
@@ -73,16 +57,16 @@ class MockAlbumViewModelTest: XCTestCase {
     }
     
     func test_page_number_is_one(){
-        XCTAssertEqual(sut?.pageNumber, 1)
+        XCTAssertEqual(sut?.pagination.pageNum, 1)
     }
     
     func test_page_number_increment(){
-        sut?.incrementPageNumber()
-        XCTAssertEqual(sut?.pageNumber, 2)
+        sut?.pagination.incrementPageNumber()
+        XCTAssertEqual(sut?.pagination.pageNum, 2)
     }
     
     func test_data_source(){
-        sut?.updateAlbumDto(albums: data!)
+        sut?.albumList = data!
         let datasource = sut?.getDataSource()
         XCTAssertEqual(datasource?.albums.count, 10)
     }
@@ -96,7 +80,7 @@ class MockAlbumViewModelTest: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
     
-        XCTAssertEqual(sut?.pageNumber, 1)
+        XCTAssertEqual(sut?.pagination.pageNum, 1)
     }
     
     func test_on_scroll_to_the_end(){
@@ -108,7 +92,7 @@ class MockAlbumViewModelTest: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
     
-        XCTAssertEqual(sut?.pageNumber, 2)
+        XCTAssertEqual(sut?.pagination.pageNum, 2)
     }
     
     func test_albums_completion_called() {
@@ -125,11 +109,6 @@ class MockAlbumViewModelTest: XCTestCase {
         XCTAssertTrue(completionHandlerCalled)
     }
     
-    private func saveToDBandFetch() -> [Album]?{
-        sut?.saveToDB(albums: data!)
-        return sut?.fetchDataFromDB()
-    }
-    
     private func fetchAlbums() -> [AlbumModel]?{
         var resp: [AlbumModel]? = nil
         fetchDataFromNetwork(page: 1) { albums in
@@ -139,7 +118,7 @@ class MockAlbumViewModelTest: XCTestCase {
     }
     
     private func fetchDataFromNetwork(page:Int, completion:@escaping (([AlbumModel]) -> Void)){
-        repository?.fetchAlbumData(page:page).subscribe(onNext: { data, _ in
+        repository?.fetchDataFromApi(page:page).subscribe(onNext: { data, _ in
                 if let albums = data{
                     completion(albums)
                 }

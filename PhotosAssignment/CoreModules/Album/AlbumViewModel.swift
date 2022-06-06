@@ -7,12 +7,11 @@
 
 import Foundation
 import RxSwift
-import CoreAudio
 
-class AlbumViewModel:AlbumListViewModelProtocol{
+final class AlbumViewModel:AlbumListViewModelProtocol{
     var coordinatorDelegate: PhotosCoordinatorDelegate?
     weak var delegate: AlbumViewControllerDelegate?
-    let pagination = PaginationApiClass<AlbumModel>()
+    let pagination = PaginationApiClass<AlbumDto>()
     var getTitle: String { Constants.Nav.album }
     var getCellIndentifier: String { Constants.Cell.album }
     var refreshTitle: String { Constants.Other.refreshtitle }
@@ -37,18 +36,26 @@ class AlbumViewModel:AlbumListViewModelProtocol{
     
     func load(){
         initViewSetup()
-        let db = fetchDataFromDB()
-        guard db.count > 0 else {
-            delegate?.setLoading(true)
-            fetchDataFromNetwork(page: pagination.pageNum, action: { [weak self] albums in
-                guard let self = self else{ return }
-                self.delegate?.setLoading(false)
-                self.saveDataToDB(albums: albums)
-                self.updateAlbumDto(albums: albums)
-            })
-            return
+        repository.provideData { [weak self] in
+            guard let self = self else{ return }
+            self.delegate?.setLoading(true)
+        } completion: { [weak self] albums, error in
+            guard let self = self else{ return }
+            self.delegate?.setLoading(false)
+            self.updateUI(albums,error)
         }
-        updateAlbumDto(albums: db)
+    }
+    
+    func updateUI(_ albums:[AlbumDto]?, _ error:String?){
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let error = error{
+                self.error = error
+            }
+            if let albums = albums{
+                self.albumList = albums
+            }
+        }
     }
     
     func initViewSetup(){
@@ -66,11 +73,13 @@ class AlbumViewModel:AlbumListViewModelProtocol{
             guard let self = self else{ return }
             self.pagination.incrementPageNumber()
             self.delegate?.onFetchingMoreData()
-            self.fetchDataFromNetwork(page: self.pagination.pageNum) { albums in
-                self.updateAlbumInDB(albums: albums)
-                self.updateDtoAfterDBUpdate()
-                self.delegate?.doneFetchingMoreData()
-                self.pagination.stopFetching(albums)
+            self.repository.fetchAndUpdate(page: self.pagination.pageNum, nil) { albums, error in
+                DispatchQueue.main.async {
+                    self.updateUI(albums,error)
+                    self.delegate?.doneFetchingMoreData()
+                    self.pagination.stopFetching(albums ?? [])
+                    
+                }
             }
         }
     }
@@ -82,26 +91,13 @@ class AlbumViewModel:AlbumListViewModelProtocol{
     
     func refresh() {
         pagination.resetPageNumber()
-        fetchDataFromNetwork(page: pagination.pageNum) { [weak self] albums in
-            guard let self = self else{ return }
-            self.delegate?.doneRefreshing()
-            self.saveDataToDB(albums: albums)
-            self.updateDtoAfterDBUpdate()
-        }
-    }
-    
-    private func fetchDataFromNetwork(page:Int, action:@escaping (([AlbumModel]) -> Void)){
-        repository.fetchAlbumData(page:page).subscribe(onNext: { [weak self] data, err in
+        repository.fetchAndSave(page: pagination.pageNum) { [weak self] albums, error in
             guard let self = self else{ return }
             DispatchQueue.main.async {
-                if let albums = data{
-                    action(albums)
-                }
-                
-                if let error = err{
-                    self.error = error
-                }
+                self.updateUI(albums,error)
+                self.delegate?.doneRefreshing()
+                self.updateUI(albums, error)
             }
-        }).disposed(by: disposeBag)
+        }
     }
 }
