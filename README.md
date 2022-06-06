@@ -17,4 +17,6 @@ The App contains three screens, the album screen, the photos screen, the photo d
 * Factory Design Pattern
 * Decorators
 * Dependency Injection 
+* Decoupling Using Protocols
+* Pagination
 
