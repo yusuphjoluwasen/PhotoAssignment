@@ -10,12 +10,18 @@ import UIKit
 final class AlbumDataSource:NSObject{
     typealias AlbumDidSelectItemHandler = (Int) -> Void
     typealias ScrollToTheEndHandler = () -> Void
-    
+
+    private let tableView: UITableView
     var albums:[AlbumDto] = []
+    var didSelectItemHandler: AlbumDidSelectItemHandler
+    var scrollToTheEndHandler: ScrollToTheEndHandler
     var cellIndentifier:String = Constants.Cell.album
     
-    init(albums:[AlbumDto]) {
+    init(_ albums:[AlbumDto], _ tableView: UITableView, _ didSelectItemHandler: @escaping AlbumDidSelectItemHandler, _ scrollToTheEndHandler: @escaping ScrollToTheEndHandler) {
         self.albums = albums
+        self.didSelectItemHandler = didSelectItemHandler
+        self.scrollToTheEndHandler = scrollToTheEndHandler
+        self.tableView = tableView
     }
 }
 
@@ -37,14 +43,12 @@ extension AlbumDataSource:UITableViewDataSource{
     }
 }
 
-extension AlbumViewController:UITableViewDelegate{
+extension AlbumDataSource:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.getAlbumItem(at: indexPath.item)
+        didSelectItemHandler(indexPath.item)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.atBottom(tableView){
-            viewModel?.onScrollToTheEnd()
-        }
+        if scrollView.atBottom(tableView){ scrollToTheEndHandler() }
     }
 }

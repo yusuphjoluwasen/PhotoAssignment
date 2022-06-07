@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
 final class AlbumViewModel:AlbumListViewModelProtocol{
     var coordinatorDelegate: PhotosCoordinatorDelegate?
@@ -64,8 +65,16 @@ final class AlbumViewModel:AlbumListViewModelProtocol{
         delegate?.reloadCollection()
     }
     
-    func getDataSource() -> AlbumDataSource {
-        return AlbumDataSource(albums: albumList)
+    func getDataSource(_ tableView:UITableView) -> AlbumDataSource {
+        let didSelectItemHandler : AlbumDataSource.AlbumDidSelectItemHandler = {  [weak self] index in
+            self?.getAlbumItem(at: index)
+        }
+        
+        let scrollToTheEndHandler : AlbumDataSource.ScrollToTheEndHandler = {  [weak self] in
+            self?.onScrollToTheEnd()
+        }
+        
+        return AlbumDataSource(albumList,tableView,didSelectItemHandler,scrollToTheEndHandler)
     }
     
     func onScrollToTheEnd() {

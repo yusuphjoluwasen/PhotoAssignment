@@ -5,7 +5,7 @@
 //  Created by Guru on 04/06/2022.
 //
 
-import Foundation
+import UIKit
 
 protocol AlbumListViewModelProtocol:AnyObject {
     var coordinatorDelegate: PhotosCoordinatorDelegate? { get set }
@@ -16,7 +16,7 @@ protocol AlbumListViewModelProtocol:AnyObject {
     
     func load()
     func initViewSetup()
-    func getDataSource() -> AlbumDataSource
+    func getDataSource(_ tableView:UITableView) -> AlbumDataSource
     func onScrollToTheEnd()
     func getAlbumItem(at index: Int)
     func refresh()

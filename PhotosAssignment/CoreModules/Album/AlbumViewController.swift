@@ -22,9 +22,9 @@ class AlbumViewController:UIViewController{
     }
     
     public func reloaDataSource() {
-        dataSource = viewModel?.getDataSource()
+        dataSource = viewModel?.getDataSource(tableView)
         tableView.dataSource = dataSource
-        tableView.delegate = self
+        tableView.delegate = dataSource
         tableView?.tableFooterView = TableLoader.shared.spinnerFooter(tableView)
         tableView.reloadData()
     }
