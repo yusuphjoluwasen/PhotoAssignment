@@ -264,6 +264,7 @@
 		09872B7F284F24D4008E2CCD /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				095791E828493573001B0869 /* AlbumRepository.swift */,
 				09872B80284F253C008E2CCD /* AlbumDBHandler.swift */,
 				09872B82284F2556008E2CCD /* AlbumTransformationHandler.swift */,
 				09872B84284F2566008E2CCD /* AlbumApiHandler.swift */,
@@ -271,15 +272,30 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		09872B86284F39E0008E2CCD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				09E7D005284BBAF700D7D3B4 /* AlbumViewModelProtocols.swift */,
+				095791E628493551001B0869 /* AlbumViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09872B87284F39E8008E2CCD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				09E7CFFF284B6B5B00D7D3B4 /* AlbumDataSource.swift */,
+				098F5A17284764F10002364B /* AlbumViewController.swift */,
+				09E7D003284B79DE00D7D3B4 /* AlbumViewAction.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		098F5A16284764DC0002364B /* Album */ = {
 			isa = PBXGroup;
 			children = (
-				098F5A17284764F10002364B /* AlbumViewController.swift */,
-				09E7CFFF284B6B5B00D7D3B4 /* AlbumDataSource.swift */,
-				09E7D003284B79DE00D7D3B4 /* AlbumViewAction.swift */,
-				095791E628493551001B0869 /* AlbumViewModel.swift */,
-				09E7D005284BBAF700D7D3B4 /* AlbumViewModelProtocols.swift */,
-				095791E828493573001B0869 /* AlbumRepository.swift */,
+				09872B87284F39E8008E2CCD /* View */,
+				09872B86284F39E0008E2CCD /* ViewModel */,
 				09872B7F284F24D4008E2CCD /* Repository */,
 			);
 			path = Album;

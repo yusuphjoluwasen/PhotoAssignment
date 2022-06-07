@@ -38,7 +38,10 @@ class AppCoordinator: CoordinatorProtocol {
     }
     
     private func getAlbumViewController() -> AlbumViewController {
-        let repository = AlbumRepository(factory: factory)
+        let db:AlbumDBDelegate = AlbumDBHandler()
+        let transform:AlbumTransformationDelegate = AlbumTransformationHandler()
+        let api:AlbumApiDelegate = AlbumAPiHandler(factory: factory)
+        let repository = AlbumRepository(api: api, transform: transform, db: db)
         let viewModel = AlbumViewModel(repository: repository)
         let controller = StoryboardInitializable.initFromStoryboard(storyboardIdentifier: Constants.StoryboardIdentifiers.album) as? AlbumViewController
         controller?.viewModel = viewModel

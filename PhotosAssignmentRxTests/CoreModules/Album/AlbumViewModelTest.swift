@@ -66,8 +66,9 @@ class MockAlbumViewModelTest: XCTestCase {
     }
     
     func test_data_source(){
+        let tableView = UITableView()
         sut?.albumList = data!
-        let datasource = sut?.getDataSource()
+        let datasource = sut?.getDataSource(tableView)
         XCTAssertEqual(datasource?.albums.count, 10)
     }
     

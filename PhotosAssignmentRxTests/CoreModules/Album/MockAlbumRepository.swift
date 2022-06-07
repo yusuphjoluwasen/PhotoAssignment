@@ -8,7 +8,7 @@
 @testable import PhotosAssignment
 import RxSwift
 
-final class MockAlbumRepository:PrivateAlbumApiRepositoryDelegate & AlbumRepositoryDelegate & AlbumTransformRepositoryDelegate{
+final class MockAlbumRepository:AlbumRepositoryDelegate{
     func mapAlbumDataToDto(data:[AlbumModel]) -> [AlbumDto]{
         return data.map{ album in
             let id = album.id
@@ -28,7 +28,7 @@ final class MockAlbumRepository:PrivateAlbumApiRepositoryDelegate & AlbumReposit
         return factory.fetchData(request: nil)
     }
     
-    func provideData(loading: @escaping () -> Void, completion: @escaping AlbumDtoHandler) {
+    func provideData(loading: () -> Void, completion: @escaping AlbumDtoHandler) {
         
     }
     
