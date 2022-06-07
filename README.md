@@ -1,7 +1,7 @@
 # PhotoAssigment
-PhotoAssigment is an clean iOS Application that fetches albums, display photos in selected album, on click of one of the photos shows a photo detail screen.
+PhotoAssigment is an clean iOS Application that fetches albums from an api, fetches and display photos from selected album, on click of one of the photos, shows a photo detail screen.
 
-##Description
+## Description
 The App contains three screens, the album screen, the photos screen, the photo detail screen
 
 ## iOS Tech Stack
