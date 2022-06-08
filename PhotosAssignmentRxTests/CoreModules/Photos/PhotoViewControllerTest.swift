@@ -13,29 +13,20 @@ import RxSwift
 class PhotoControllerTest: XCTestCase {
 
     var sut:PhotoViewController?
-    var repo:MockPhotoRepository?
-    var viewmodel:PhotoViewModel?
-    var photo_list:[PhotoModel]?
-    var photo_list_dto:[PhotoDto]?
-    let disposeBag = DisposeBag()
+    var photo_list:[PhotoDto]?
     var cell:PhotoCell?
     
     override func setUp() {
         super.setUp()
-        repo = MockPhotoRepository()
-        viewmodel = PhotoViewModel(repository: repo!, albumId: 1)
+
         sut = PhotoViewController()
-        sut?.viewModel = viewmodel
-        photo_list = fetchPhotos()
+        photo_list = getPhotos()
     }
     
     override func tearDown() {
-        repo = nil
-        viewmodel = nil
         sut = nil
         cell = nil
         photo_list = nil
-        photo_list_dto = nil
         super.tearDown()
     }
     
@@ -55,7 +46,7 @@ class PhotoControllerTest: XCTestCase {
         let first_photo = sut?.cellData[0]
         
         XCTAssertEqual(first_photo?.id, 1)
-        XCTAssertEqual(first_photo?.title, "accusamus beatae ad facilis cum similique qui sunt")
+        XCTAssertEqual(first_photo?.title, "reprehenderit est deserunt velit ipsam")
         XCTAssertEqual(first_photo?.imageUrl, "https://via.placeholder.com/150/92c952")
     }
     
@@ -77,8 +68,8 @@ class PhotoControllerTest: XCTestCase {
     }
     
     func test_collection_view_has_a_datasource(){
+        addDataToController()
         sut?.initSetup()
-        viewmodel?.delegate?.reloadCollection()
         
         XCTAssertNotNil(sut?.contentView.collectionView.dataSource)
     }
@@ -92,13 +83,10 @@ class PhotoControllerTest: XCTestCase {
     
     //refactor
     func addDataToController(){
-        //Given
-        let photo_list_dto = viewmodel?.mapPhotoDataToDto(data: photo_list!)
-        viewmodel?.photoList = photo_list_dto!
-        
         //when
         sut?.initSetup()
-        viewmodel?.delegate?.reloadCollection()
+        
+        sut?.cellData = photo_list ?? []
     }
     
     func setUpCell(){
@@ -107,19 +95,11 @@ class PhotoControllerTest: XCTestCase {
         cell = sut?.contentView.collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell
     }
     
-    private func fetchPhotos() -> [PhotoModel]?{
-        var resp: [PhotoModel]? = nil
-        fetchDataFromNetwork(page: 1) { photos in
-           resp = photos
-        }
-        return resp
+    private func getPhotos() -> [PhotoDto]{
+        let photo1 = PhotoDto(id: 1, title: "reprehenderit est deserunt velit ipsam", imageUrl: "https://via.placeholder.com/150/92c952")
+        let photo2 = PhotoDto(id: 1, title: "officia porro iure quia iusto qui ipsa ut modi", imageUrl: "https://via.placeholder.com/150/771796")
+        return [photo1, photo2]
     }
     
-    private func fetchDataFromNetwork(page:Int, completion:@escaping (([PhotoModel]) -> Void)){
-        repo?.fetchPhotoData(page:page, albumId: 1).subscribe(onNext: { data, _ in
-                if let photos = data{
-                    completion(photos)
-                }
-        }).disposed(by: disposeBag)
-    }
+    
 }

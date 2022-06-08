@@ -10,7 +10,7 @@ import RxSwift
 import XCTest
 @testable import PhotosAssignment
 
-class MockAlbumViewModelTest: XCTestCase {
+class AlbumViewModelTest: XCTestCase {
 
     var repository:MockAlbumRepository?
     let disposeBag = DisposeBag()

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 func resolveResponse<T:Any>(_ data:[T]?, _ err:String?, _ completion: @escaping ([T]?, String?) -> Void){
     if let err = err {
@@ -15,5 +16,7 @@ func resolveResponse<T:Any>(_ data:[T]?, _ err:String?, _ completion: @escaping 
         completion(data, nil)
     }
 }
+
+
 
 func doNothing(){}

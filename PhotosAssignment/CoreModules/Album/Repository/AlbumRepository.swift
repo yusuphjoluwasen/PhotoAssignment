@@ -14,7 +14,7 @@ typealias AlbumDtoHandler = (([AlbumDto]?, String?) -> Void)
 protocol AlbumRepositoryDelegate {
     func provideData(loading:() -> Void, completion: @escaping AlbumDtoHandler)
     func fetchAndSave(page:Int, completion:@escaping AlbumDtoHandler)
-    func fetchAndUpdate(page: Int,_ loading:(() -> Void)?, completion: @escaping AlbumDtoHandler)
+    func fetchAndUpdate(page: Int, completion: @escaping AlbumDtoHandler)
 }
 
 final class AlbumRepository:AlbumRepositoryDelegate {
@@ -40,8 +40,7 @@ final class AlbumRepository:AlbumRepositoryDelegate {
         completion(transform.mapAlbumDataToDto(data: data), nil)
     }
     
-    func fetchAndUpdate(page: Int,_ loading: (() -> Void)?, completion: @escaping AlbumDtoHandler) {
-        (loading ?? doNothing)()
+    func fetchAndUpdate(page: Int,completion: @escaping AlbumDtoHandler) {
         fetchDataFromNetwork(page: page) { [weak self] data, err in
             guard let self = self else { return }
             resolveResponse(data,err) { albums, err in

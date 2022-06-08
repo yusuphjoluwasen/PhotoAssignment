@@ -82,7 +82,7 @@ final class AlbumViewModel:AlbumListViewModelProtocol{
             guard let self = self else{ return }
             self.pagination.incrementPageNumber()
             self.delegate?.onFetchingMoreData()
-            self.repository.fetchAndUpdate(page: self.pagination.pageNum, nil) { albums, error in
+            self.repository.fetchAndUpdate(page: self.pagination.pageNum) { albums, error in
                 DispatchQueue.main.async {
                     self.updateUI(albums,error)
                     self.delegate?.doneFetchingMoreData()

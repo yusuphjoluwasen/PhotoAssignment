@@ -15,8 +15,7 @@ class PhotoViewModel:PhotoViewModelProtocol{
     var getTitle: String { Constants.Nav.photos }
     var navTitleColor: UIColor { UIColor.black }
     var refreshTitle: String { Constants.Other.refreshtitle }
-    let disposeBag = DisposeBag()
-    let pagination = PaginationApiClass<PhotoModel>()
+    let pagination = PaginationApiClass<PhotoDto>()
     private let albumId:Int
     private let repository:PhotoRepositoryDelegate
     
@@ -40,10 +39,13 @@ class PhotoViewModel:PhotoViewModelProtocol{
     func load(){
         initViewSetup()
         delegate?.setLoading(true)
-        fetchDataFromNetwork(page:pagination.pageNum, albumId: albumId, action: { [weak self] photos in
+        repository.fetch(page:pagination.pageNum, albumId: albumId, completion: { [weak self] photos, err in
             guard let self = self else{ return }
-            self.delegate?.setLoading(false)
-            self.updatePhotoDto(photos: photos)
+            self.updateUI(photos, err) { [weak self] in
+                guard let self = self else{ return }
+                self.delegate?.setLoading(false)
+                self.updatePhotoDto(photos: photos ?? [])
+            }
         })
         return
     }
@@ -54,22 +56,20 @@ class PhotoViewModel:PhotoViewModelProtocol{
         delegate?.setUpRefresh()
     }
     
-    func updatePhotoDto(photos: [PhotoModel]){
-        photoList.append(contentsOf: mapPhotoDataToDto(data: photos))
+    func updatePhotoDto(photos: [PhotoDto]){
+        photoList.append(contentsOf:photos)
     }
     
-    func mapPhotoDataToDto(data:[PhotoModel]) -> [PhotoDto]{
-        return data.map{ photo in
-            PhotoDto(id: photo.id.toInt, title: photo.title.toString, imageUrl: photo.thumbnailUrl.toString)
-        }
-    }
     
     func onScrollToTheEnd() {
         pagination.incrementPageNumber()
-        fetchDataFromNetwork(page: pagination.pageNum, albumId: albumId) { [weak self] photos in
+        repository.fetch(page: pagination.pageNum, albumId: albumId) { [weak self] photos, err in
             guard let self = self else{ return }
-            self.updatePhotoDto(photos: photos)
-            self.pagination.stopFetching(photos)
+            self.updateUI(photos, err) { [weak self] in
+                guard let self = self else{ return }
+                self.updatePhotoDto(photos: photos ?? [])
+                self.pagination.stopFetching(photos ?? [])
+            }
         }
     }
     
@@ -79,25 +79,25 @@ class PhotoViewModel:PhotoViewModelProtocol{
     
     func refresh() {
         pagination.resetPageNumber()
-        fetchDataFromNetwork(page: pagination.pageNum, albumId: albumId) { [weak self] photos in
+        repository.fetch(page: pagination.pageNum, albumId: albumId) { [weak self] photos,err  in
             guard let self = self else{ return }
-            self.delegate?.doneRefreshing()
-            self.updatePhotoDto(photos: photos)
+            self.updateUI(photos, err) { [weak self] in
+                guard let self = self else{ return }
+                self.delegate?.doneRefreshing()
+                self.updatePhotoDto(photos: photos ?? [])
+            }
         }
     }
     
-    private func fetchDataFromNetwork(page:Int, albumId:Int, action:@escaping (([PhotoModel]) -> Void)){
-        repository.fetchPhotoData(page: page, albumId: albumId).subscribe(onNext: { [weak self] data, err in
-            guard let self = self else{ return }
-            DispatchQueue.main.async {
-                if let photos = data{
-                    action(photos)
-                }
-                
-                if let error = err{
-                    self.error = error
-                }
+    func updateUI(_ photos:[PhotoDto]?, _ error:String?, _ completion: @escaping () -> ()){
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let error = error{
+                self.error = error
             }
-        }).disposed(by: disposeBag)
+            if let _ = photos{
+                completion()
+            }
+        }
     }
 }

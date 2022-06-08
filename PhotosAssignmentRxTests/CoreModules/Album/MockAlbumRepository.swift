@@ -9,6 +9,7 @@
 import RxSwift
 
 final class MockAlbumRepository:AlbumRepositoryDelegate{
+    
     func mapAlbumDataToDto(data:[AlbumModel]) -> [AlbumDto]{
         return data.map{ album in
             let id = album.id
@@ -36,7 +37,7 @@ final class MockAlbumRepository:AlbumRepositoryDelegate{
         
     }
     
-    func fetchAndUpdate(page: Int, _ loading: (() -> Void)?, completion: @escaping AlbumDtoHandler) {
+    func fetchAndUpdate(page: Int, completion: @escaping AlbumDtoHandler) {
         
     }
 }
