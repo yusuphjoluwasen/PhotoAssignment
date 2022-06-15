@@ -19,4 +19,5 @@ The App contains three screens, the album screen, the photos screen, the photo d
 * Dependency Injection 
 * Decoupling Using Protocols
 * Pagination
+* Dark Mode Support
 
