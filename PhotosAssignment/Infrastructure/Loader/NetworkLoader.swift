@@ -17,7 +17,7 @@ class NetworkLoader: NSObject {
 
     var appDelegate: SceneDelegate {
         guard let sceneDelegate = UIApplication.shared.connectedScenes
-            .first!.delegate as? SceneDelegate else {
+            .first?.delegate as? SceneDelegate else {
                 fatalError("sceneDelegate is not UIApplication.shared.delegate")
         }
         return sceneDelegate

@@ -11,7 +11,7 @@ final class PhotoCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let this = UILabel()
-        this.setUpGenLabel(text: "", textColor: .tertiaryColor, font: .systemFont14Bold,
+        this.setUpGenLabel(text: "", textColor: .photoTextColor, font: .systemFont14Bold,
                            numberOfLines: Constants.Dim.three)
         return this
     }()

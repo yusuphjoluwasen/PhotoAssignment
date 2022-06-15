@@ -24,7 +24,7 @@ final class PhotoView: UIView {
     }
     
     private func configureViews(){
-        backgroundColor = .white
+        backgroundColor = .photoBgColor
     }
     
     private func configureSubviews() {

@@ -20,9 +20,9 @@ class PaginationApiClass<Element>{
     }
     
     
-    func fetch(_ action:@escaping () -> Void){
+    func fetch(_ completionhandler:@escaping () -> Void){
         if fetchMoreData{
-            action()
+            completionhandler()
         }
     }
     

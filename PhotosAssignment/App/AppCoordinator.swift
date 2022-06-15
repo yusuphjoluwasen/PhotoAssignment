@@ -21,8 +21,6 @@ class AppCoordinator: CoordinatorProtocol {
     let network:NetworkingDelegate!
     let window: UIWindow?
     let factory:RepositoryFactoryDelegate
-    
-    var childCoordinator: CoordinatorProtocol?
 
     init(window: UIWindow?) {
         self.window = window

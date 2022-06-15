@@ -10,7 +10,7 @@ import UIKit
 final class AlbumDataSource:NSObject{
     typealias AlbumDidSelectItemHandler = (Int) -> Void
     typealias ScrollToTheEndHandler = () -> Void
-
+    
     private let tableView: UITableView
     var albums:[AlbumDto] = []
     var didSelectItemHandler: AlbumDidSelectItemHandler

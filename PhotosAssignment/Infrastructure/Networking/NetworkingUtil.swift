@@ -20,19 +20,18 @@ enum RequestError: Error {
     case serverError
     case noData
     case dataDecodingError
+    case invalidUrl
 }
 
 extension RequestError{
     public var errorDescription: String {
         switch self {
-        case .clientError:
+        case .clientError, .noData, .dataDecodingError:
             return NetworkConstants.clienterror
         case .serverError:
             return NetworkConstants.noservice
-        case .noData:
-            return NetworkConstants.clienterror
-        case .dataDecodingError:
-            return NetworkConstants.clienterror
+        case .invalidUrl:
+            return NetworkConstants.invalidUrl
         }
     }
 }
@@ -62,6 +61,7 @@ extension Response {
 enum NetworkConstants{
     static let clienterror = "please check inputs"
     static let noservice = "service not available"
+    static let invalidUrl = "invalid Url"
 }
 
 

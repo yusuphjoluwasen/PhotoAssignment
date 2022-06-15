@@ -33,6 +33,7 @@ enum Constants {
     }
     
     enum Dim {
+        static let zero = 0
         static let one = 1
         static let two = 2
         static let three = 3

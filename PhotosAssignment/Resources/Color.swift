@@ -32,7 +32,8 @@ extension UIColor{
     
     static let primaryColor : UIColor = hexStringToUIColor(hex: "#3A3F47", alpha: 1)
     static let secondaryColor : UIColor = hexStringToUIColor(hex: "#8B9A47", alpha: 1)
-    static let tertiaryColor : UIColor = hexStringToUIColor(hex: "#EEEEEE", alpha: 1)
+    static let photoBgColor : UIColor = UIColor(named: "photos_background") ?? UIColor.white
+    static let photoTextColor : UIColor = UIColor(named: "photos_text") ?? UIColor.black
     static let backgroundColor : UIColor = hexStringToUIColor(hex: "#E5E5E5", alpha: 1)
 }
 

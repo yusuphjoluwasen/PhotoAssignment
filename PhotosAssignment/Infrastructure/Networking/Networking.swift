@@ -16,9 +16,12 @@ protocol NetworkingDelegate{
 struct Networking:NetworkingDelegate {
     func makeUrlRequest<T:Codable>(request: EndpointType?, returnType: T.Type) -> Observable<Handler<T>> {
         
-        let urlRequest = RequestFactory.request(endpoint: request!)
-        print("✅  Request: \(urlRequest)")
         return Observable.create{ observer in
+            guard let request = request else {
+                return Disposables.create { observer.onNext(.failure(.invalidUrl)) }
+            }
+            let urlRequest = RequestFactory.request(endpoint: request)
+            print("✅  Request: \(urlRequest)")
             
             let urlTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
                 guard error == nil else {

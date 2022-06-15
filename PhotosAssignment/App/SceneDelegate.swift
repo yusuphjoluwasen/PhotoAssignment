@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  Evaluation
+//  PhotosAssignment
 //
-//  Created by arch on 23/05/2022.
+//  Created by Guru on 02/06/2022.
 //
 
 import UIKit

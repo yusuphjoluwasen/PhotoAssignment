@@ -24,7 +24,6 @@ class TableLoader{
     
     func hide() {
         spinner.stopAnimating()
+        spinner.removeFromSuperview()
     }
-    
-    
 }

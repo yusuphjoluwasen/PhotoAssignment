@@ -16,7 +16,6 @@ extension PhotoCell {
     }
     
     private func configureView(){
-        backgroundColor = .black
         layer.cornerRadius = CGFloat(Constants.Dim.five)
         titleLabel.textAlignment = .center
     }
