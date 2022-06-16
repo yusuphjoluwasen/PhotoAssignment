@@ -9,6 +9,7 @@
 import RxSwift
 
 final class MockAlbumRepository:AlbumRepositoryDelegate{
+    let disposeBag = DisposeBag()
     
     func mapAlbumDataToDto(data:[AlbumModel]) -> [AlbumDto]{
         return data.map{ album in
@@ -30,7 +31,9 @@ final class MockAlbumRepository:AlbumRepositoryDelegate{
     }
     
     func provideData(loading: () -> Void, completion: @escaping AlbumDtoHandler) {
-        
+        fetchDataFromNetwork(page:1, completion:{ [weak self] data, err in
+            resolveResponse(self?.mapAlbumDataToDto(data: data!), err, completion)
+        })
     }
     
     func fetchAndSave(page: Int, completion: @escaping AlbumDtoHandler) {
@@ -40,4 +43,12 @@ final class MockAlbumRepository:AlbumRepositoryDelegate{
     func fetchAndUpdate(page: Int, completion: @escaping AlbumDtoHandler) {
         
     }
+    
+    private func fetchDataFromNetwork(page:Int, completion:@escaping AlbumModelHandler){
+        fetchDataFromApi(page:page).subscribe(onNext: { data, err in
+            resolveResponse(data, err, completion)
+        }).disposed(by: disposeBag)
+    }
 }
+
+

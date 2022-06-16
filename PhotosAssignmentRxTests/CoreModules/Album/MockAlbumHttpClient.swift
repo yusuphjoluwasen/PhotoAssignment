@@ -27,7 +27,6 @@ class MockAlbumHttpClient:NetworkingDelegate{
             }
             observer.onNext(.success(decoded))
             return Disposables.create {
-                
             }
         }
     }

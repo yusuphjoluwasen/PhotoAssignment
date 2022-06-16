@@ -21,7 +21,7 @@ class AlbumViewModelTest: XCTestCase {
         super.setUp()
         repository = MockAlbumRepository()
         sut = AlbumViewModel(repository: repository!)
-        data =  repository?.mapAlbumDataToDto(data: fetchAlbums()!)
+        data =  getAlbumDtoList()
     }
 
     override func tearDown() {
@@ -30,18 +30,9 @@ class AlbumViewModelTest: XCTestCase {
         data = nil
         super.tearDown()
     }
-
-    func test_album_fetch_sucessfully(){
-        XCTAssertNotNil(fetchAlbums(), "albums are not empty")
-    }
     
     func test_album_list_is_empty(){
         XCTAssertTrue(sut?.albumList.count == 0, "list is empty")
-    }
-    
-    func test_album_list_is_not_empty(){
-        sut?.albumList = data!
-        XCTAssertTrue(sut?.albumList.count == 10, "list is not empty")
     }
 
     func test_nav_title_is_correct(){
@@ -69,60 +60,26 @@ class AlbumViewModelTest: XCTestCase {
         let tableView = UITableView()
         sut?.albumList = data!
         let datasource = sut?.getDataSource(tableView)
-        XCTAssertEqual(datasource?.albums.count, 10)
+        XCTAssertEqual(datasource?.albums.count, 1)
     }
     
-    func test_refresh(){
-        let exp = expectation(description: "refresh")
+    func test_load(){
+        let exp = expectation(description: "load")
         
-        sut?.refresh()
+        repository?.provideData(loading: {
+            
+        }, completion: { [weak self] album, error in
+            self?.sut?.albumList = album ?? []
+        })
+        XCTAssertEqual(sut?.albumList.count, 10)
         
         exp.fulfill()
         
-        wait(for: [exp], timeout: 1.0)
-    
-        XCTAssertEqual(sut?.pagination.pageNum, 1)
+        sut?.load()
+        wait(for: [exp], timeout: 0.2)
     }
     
-    func test_on_scroll_to_the_end(){
-        let exp = expectation(description: "scroll to the end")
-       
-        sut?.onScrollToTheEnd()
-        
-        exp.fulfill()
-        
-        wait(for: [exp], timeout: 1.0)
-    
-        XCTAssertEqual(sut?.pagination.pageNum, 2)
-    }
-    
-    func test_albums_completion_called() {
-        let exp = expectation(description: "apiCall")
-        
-        var completionHandlerCalled = false
-        fetchDataFromNetwork(page: 1) { album in
-            completionHandlerCalled = true
-            print(album)
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
-        XCTAssertTrue(completionHandlerCalled)
-    }
-    
-    private func fetchAlbums() -> [AlbumModel]?{
-        var resp: [AlbumModel]? = nil
-        fetchDataFromNetwork(page: 1) { albums in
-           resp = albums
-        }
-        return resp
-    }
-    
-    private func fetchDataFromNetwork(page:Int, completion:@escaping (([AlbumModel]) -> Void)){
-        repository?.fetchDataFromApi(page:page).subscribe(onNext: { data, _ in
-                if let albums = data{
-                    completion(albums)
-                }
-        }).disposed(by: disposeBag)
+    private func getAlbumDtoList() -> [AlbumDto]{
+        return [AlbumDto(id: 1, title: "sunt qui excepturi placeat culpa")]
     }
 }

@@ -17,9 +17,8 @@ extension UIView{
 
 extension UICollectionView{
     public func setUpCollectionView(bgColor:UIColor = .clear){
-        self.translatesAutoresizingMaskIntoConstraints = false
         self.showsVerticalScrollIndicator = false
-        self.backgroundColor = bgColor
+        self.setUpView(bgColor: bgColor)
     }
 }
 

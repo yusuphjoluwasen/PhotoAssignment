@@ -9,7 +9,7 @@ import UIKit
 
 extension AlbumViewController:AlbumViewControllerDelegate{
     func setUpTitle() {
-        navigationItem.title = viewModel?.getTitle
+        setUpNavigationTitle(viewModel?.getTitle)
     }
     
     func sendError(error: String) {

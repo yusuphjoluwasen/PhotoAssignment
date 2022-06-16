@@ -5,7 +5,6 @@
 //  Created by Guru on 02/06/2022.
 //
 
-import RxSwift
 import UIKit
 
 final class AlbumViewModel:AlbumListViewModelProtocol{
@@ -15,7 +14,6 @@ final class AlbumViewModel:AlbumListViewModelProtocol{
     var getTitle: String { Constants.Nav.album }
     var getCellIndentifier: String { Constants.Cell.album }
     var refreshTitle: String { Constants.Other.refreshtitle }
-    let disposeBag = DisposeBag()
     private let repository:AlbumRepositoryDelegate
     
     init(repository:AlbumRepositoryDelegate) {
@@ -86,7 +84,6 @@ final class AlbumViewModel:AlbumListViewModelProtocol{
                     self.updateUI(albums,error)
                     self.delegate?.doneFetchingMoreData()
                     self.pagination.stopFetching(albums ?? [])
-                    
                 }
             }
         }

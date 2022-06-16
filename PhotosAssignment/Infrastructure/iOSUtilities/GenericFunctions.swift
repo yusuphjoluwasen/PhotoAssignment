@@ -17,6 +17,4 @@ func resolveResponse<T:Any>(_ data:[T]?, _ err:String?, _ completion: @escaping 
     }
 }
 
-
-
 func doNothing(){}

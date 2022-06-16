@@ -11,6 +11,7 @@
 		0926842F284350510017BE0C /* MockAlbumHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0926842E284350510017BE0C /* MockAlbumHttpClient.swift */; };
 		09268431284351110017BE0C /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09268430284351110017BE0C /* StubGenerator.swift */; };
 		09268433284353AB0017BE0C /* MockAlbumRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09268432284353AB0017BE0C /* MockAlbumRepositoryFactory.swift */; };
+		093E80B3285ACA0C001A7B6B /* AlbumRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093E80B2285ACA0C001A7B6B /* AlbumRepositoryTest.swift */; };
 		095791BD2848256B001B0869 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095791BC2848256B001B0869 /* PhotoViewController.swift */; };
 		095791BF28482575001B0869 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095791BE28482575001B0869 /* PhotoView.swift */; };
 		095791C128482590001B0869 /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095791C028482590001B0869 /* PhotoRepository.swift */; };
@@ -107,6 +108,7 @@
 		0926842E284350510017BE0C /* MockAlbumHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumHttpClient.swift; sourceTree = "<group>"; };
 		09268430284351110017BE0C /* StubGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
 		09268432284353AB0017BE0C /* MockAlbumRepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumRepositoryFactory.swift; sourceTree = "<group>"; };
+		093E80B2285ACA0C001A7B6B /* AlbumRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepositoryTest.swift; sourceTree = "<group>"; };
 		095791BC2848256B001B0869 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		095791BE28482575001B0869 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		095791C028482590001B0869 /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				09268432284353AB0017BE0C /* MockAlbumRepositoryFactory.swift */,
 				0926842E284350510017BE0C /* MockAlbumHttpClient.swift */,
 				09E7D017284BED4B00D7D3B4 /* AlbumViewModelTest.swift */,
+				093E80B2285ACA0C001A7B6B /* AlbumRepositoryTest.swift */,
 			);
 			path = Album;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				09E7D018284BED4B00D7D3B4 /* AlbumViewModelTest.swift in Sources */,
 				09E7D03C284CEA3900D7D3B4 /* PhotoDetailViewControllerTest.swift in Sources */,
 				09E7D031284CCDE300D7D3B4 /* MockPhotoRepositoryFactory.swift in Sources */,
+				093E80B3285ACA0C001A7B6B /* AlbumRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,7 +980,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PS856PAVJ2;
+				DEVELOPMENT_TEAM = 82FC3C5895;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
@@ -996,7 +1000,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PS856PAVJ2;
+				DEVELOPMENT_TEAM = 82FC3C5895;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;

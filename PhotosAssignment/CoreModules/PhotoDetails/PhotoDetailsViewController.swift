@@ -26,7 +26,7 @@ final class PhotoDetailsViewController: UIViewController {
 
 extension PhotoDetailsViewController:PhotoDetailsViewControllerDelegate{
     func setUpTitle() {
-        navigationItem.title = viewModel?.getTitle
+        setUpNavigationTitle(viewModel?.getTitle)
     }
     
     func setUpViews(){

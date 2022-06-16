@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import RxSwift
 import UIKit
 
 class PhotoViewModel:PhotoViewModelProtocol{
     var coordinatorDelegate: PhotosCoordinatorDetailDelegate?
     weak var delegate: PhotoViewControllerDelegate?
     var getTitle: String { Constants.Nav.photos }
-    var navTitleColor: UIColor { UIColor.black }
+    var navTitleColor: UIColor { UIColor.photoTextColor }
     var refreshTitle: String { Constants.Other.refreshtitle }
     let pagination = PaginationApiClass<PhotoDto>()
     private let albumId:Int

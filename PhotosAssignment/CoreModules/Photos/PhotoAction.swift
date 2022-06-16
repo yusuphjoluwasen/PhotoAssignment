@@ -9,7 +9,7 @@ import UIKit
 
 extension PhotoViewController:PhotoViewControllerDelegate{
     func setUpTitle() {
-        self.navigationItem.title = viewModel?.getTitle
+        setUpNavigationTitle(viewModel?.getTitle)
     }
     
     func setUpNavTitleColor() {

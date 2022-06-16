@@ -23,7 +23,6 @@ extension PhotoCell {
     private func configureSubviews() {
         addSubview(imageView)
         addSubview(titleLabel)
-        
     }
     
     static func configureCellAtIndexPath(indexPath: IndexPath, item: PhotoDto, cell:PhotoCell) {

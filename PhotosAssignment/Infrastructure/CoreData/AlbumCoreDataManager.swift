@@ -14,7 +14,8 @@ class AlbumCoreDataManager{
     class func save(albums:[AlbumModel]){
         for album in albums{
             let cdAlbum:Album = CoreDataStack.getObjectFor(entityName: CDAlbumEntity) as! Album
-            cdAlbum.id = "\(album.id ?? 0)"
+            let id = album.id.toInt
+            cdAlbum.id = id.toString()
             cdAlbum.title = album.title
             cdAlbum.savedTime = Date().timeIntervalSinceReferenceDate
         }
