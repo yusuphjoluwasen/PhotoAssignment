@@ -21,17 +21,20 @@ enum RequestError: Error {
     case noData
     case dataDecodingError
     case invalidUrl
+    case connectivityError
 }
 
 extension RequestError{
     public var errorDescription: String {
         switch self {
         case .clientError, .noData, .dataDecodingError:
-            return NetworkConstants.clienterror
+            return NetworkConstants.client
         case .serverError:
             return NetworkConstants.noservice
         case .invalidUrl:
             return NetworkConstants.invalidUrl
+        case .connectivityError:
+            return NetworkConstants.connectivity
         }
     }
 }
@@ -59,9 +62,20 @@ extension Response {
 
 // MARK: Constants
 enum NetworkConstants{
-    static let clienterror = "please check inputs"
+    static let client = "please check inputs"
     static let noservice = "service not available"
     static let invalidUrl = "invalid Url"
+    static let connectivity = "Please Check Your Internet Connection"
+}
+
+extension Error {
+    var isConnectivityError: Bool {
+        let code = (self as NSError).code
+        if code == NSURLErrorNotConnectedToInternet || code == NSURLErrorTimedOut {
+            return true
+        }
+        return false
+    }
 }
 
 

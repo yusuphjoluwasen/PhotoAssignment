@@ -48,6 +48,7 @@ final class AlbumViewModel:AlbumListViewModelProtocol{
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let error = error{
+               
                 self.error = error
             }
             if let albums = albums{

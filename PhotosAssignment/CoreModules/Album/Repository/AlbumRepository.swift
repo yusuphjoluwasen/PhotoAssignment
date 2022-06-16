@@ -47,7 +47,7 @@ final class AlbumRepository:AlbumRepositoryDelegate {
                 self.db.updateDB(albums: albums ?? [])
                 let datafromdb = self.db.fetchDataFromDB()
                 let dto = self.transform.mapAlbumDataToDto(data: datafromdb)
-                completion(dto, nil)
+                completion(dto, err)
             }
         }
     }
@@ -58,7 +58,7 @@ final class AlbumRepository:AlbumRepositoryDelegate {
             resolveResponse(data,err) { albums, err in
                 self.db.clearAndSaveToDB(albums: albums ?? [])
                 let dto = self.transform.mapAlbumDataToDto(data: albums ?? [])
-                completion(dto, nil)
+                completion(dto, err)
             }
         }
     }

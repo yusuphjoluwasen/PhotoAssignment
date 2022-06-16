@@ -21,9 +21,13 @@ struct Networking:NetworkingDelegate {
                 return Disposables.create { observer.onNext(.failure(.invalidUrl)) }
             }
             let urlRequest = RequestFactory.request(endpoint: request)
-            print("✅  Request: \(urlRequest)")
             
             let urlTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+                if let _ = error?.isConnectivityError {
+                    observer.onNext(.failure(.connectivityError))
+                    return
+                }
+                
                 guard error == nil else {
                     observer.onNext(.failure(.clientError))
                     return
@@ -44,7 +48,7 @@ struct Networking:NetworkingDelegate {
                     observer.onNext(.failure(.dataDecodingError))
                     return
                 }
-                print("✅  Response: \(decoded)")
+                
                 observer.onNext(.success(decoded))
             }
             
